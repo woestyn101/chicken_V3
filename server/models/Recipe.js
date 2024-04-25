@@ -16,11 +16,6 @@ const recipeSchema = new Schema({
   },
   image: {
     type: String
-  },
-    category: {
-    type: Schema.Types.ObjectId,
-    ref: 'Category',
-    required: true
   }
 });
 
