@@ -12,9 +12,9 @@ const typeDefs = gql`
       authors: [String]
       description: String
       name: String!
-      image: string
+      image: String
       instructions: String!
-      ingredients:  String1
+      ingredients:  String!
   }
 
   type Auth {
@@ -31,17 +31,15 @@ const typeDefs = gql`
     authors: [String]
       description: String
       name: String!
-      image: string
+      image: String
       instructions: String!
-      ingredients:  String1
+      ingredients:  String!
 
   }
 
   type Mutation {
       login( email: String!, password: String!): Auth
       addUser(username: String!, email: String!, password: String!): Auth
-      saveBook( input: BookData! ): User
-      removeBook(bookId: ID!): User
    
   }
 `;
