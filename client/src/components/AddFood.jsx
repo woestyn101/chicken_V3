@@ -43,56 +43,72 @@ const RecipeForm = () => {
   };
 
   return (
-    <div>
-      <h3>Add your recipe: </h3>
-      <form
+    <div className='container mt-4'>
+      <div className='card'>
+        <div className='card-header'>
+        Add your recipe:
+        </div>
+        <div className='card-body'>
+            <form
         className="flex-row justify-center justify-space-between-md align-center"
         onSubmit={handleFormSubmit}
       >
         <div className="col-12 col-lg-9">
+          <label>Name:
           <input
             placeholder="Recipe Name..."
             value={name}
-            className="form-input w-100"
+            className="form-control"
             onChange={(event) => setName(event.target.value)}
           />
+          </label><br/>
+          <label>Description:
           <input
             placeholder="Description..."
             value={description}
-            className="form-input w-100"
+            className="form-control"
             onChange={(event) => setDescription(event.target.value)}
           />
+          </label><br/>
+          <label>Instructions:
           <input
             placeholder="Instructions..."
             value={instructions}
-            className="form-input w-100"
+            className="form-control"
             onChange={(event) => setInstructions(event.target.value)}
           />
+          </label><br/>
+          <label>Ingredients:
           <input
             placeholder="ingredients..."
             value={ingredients}
-            className="form-input w-100"
+            className="form-control"
             onChange={(event) => setIngredients(event.target.value)}
           />
+          </label><br/>
+          <label>Image:
           <input
             placeholder="image..."
             value={image}
-            className="form-input w-100"
+            className="form-control"
             onChange={(event) => setImage(event.target.value)}
           />
-        </div>
-
-        <div className="col-12 col-lg-3">
-          <button className="btn btn-info btn-block py-3" type="submit">
+          </label><br/><br/>
+          <button className="btn btn-primary" type="submit">
             Add Recipe
           </button>
-        </div>
+        </div>      
+         
+       
         {error && (
           <div className="col-12 my-3 bg-danger text-white p-3">
             Something went wrong...
           </div>
         )}
       </form>
+      </div>
+
+      </div>
     </div>
   );
 };
