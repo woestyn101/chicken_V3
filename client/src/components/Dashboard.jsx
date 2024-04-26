@@ -6,7 +6,7 @@ import RecipeForm  from './AddFood';
 const Dashboard = () => {
   return (
     <>
-    <h1>DASHBOARD</h1>npm 
+    <h1>DASHBOARD</h1>
 
 <RecipeForm></RecipeForm>
     </>
