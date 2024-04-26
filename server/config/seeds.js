@@ -1,13 +1,13 @@
 const db = require('./connection');
-const { User, Recipe } = require('../models');
+const { User, Food } = require('../models');
 const cleanDB = require('./cleanDB');
 
 db.once('open', async () => {
-  await cleanDB('Recipe', 'Recipes');
+  await cleanDB('Food', 'foods');
   await cleanDB('User', 'users');
 
 
-  const Recipes = await Recipe.insertMany([
+  const foods = await Food.insertMany([
     {
       name: 'Buffalo Chicken Wrap',
       description:
