@@ -1,52 +1,57 @@
-/* styles.css */
+/* navBar.css */
+
+/* Navbar Background Color */
+.navbar {
+  background-color: orange; 
+}
 
 /* Navbar Brand */
 .navbar-brand {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  /* Navbar Links */
-  .navbar-nav .nav-link {
-    font-size: 1rem;
-    margin-right: 10px;
-    color: white;
-  }
-  
-  .navbar-nav .nav-link:hover {
-    color: #f8f9fa; /* Change color on hover */
-  }
-  
-  /* Navbar Toggler Icon */
-  .navbar-toggler-icon {
-    background-color: white;
-  }
-  
-  /* Navbar Background Color */
-  .navbar {
-    background-color: #343a40; /* Dark background color */
-  }
-  
-  /* Container Fluid */
-  .container-fluid {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-  
-  /* Collapse Navbar */
-  .collapse.navbar-collapse {
-    justify-content: flex-end;
-  }
-  
-  /* Navbar Items Alignment */
-  .navbar-nav {
-    align-items: center;
-  }
-  
-  /* Navbar Toggle Button */
-  .navbar-toggler {
-    border: none;
-  }
-  
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Navbar Links */
+.navbar-nav .nav-link {
+  font-size: 1rem;
+  margin-right: 10px;
+  color: white;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #f8f9fa; /* Change color on hover */
+}
+
+/* Navbar Toggler Icon */
+.navbar-toggler-icon {
+  background-image: url('../../../photos/images.jpg'); /* Adjust the path to your image */
+  background-size: contain; /* Set the background size to contain the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  width: 30px; /* Adjust the width of the icon as needed */
+  height: 30px; /* Adjust the height of the icon as needed */
+  border: none; /* Remove any border */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* Container Fluid */
+.container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Collapse Navbar */
+.collapse.navbar-collapse {
+  justify-content: flex-end;
+}
+
+/* Navbar Items Alignment */
+.navbar-nav {
+  align-items: center;
+}
+
+/* Navbar Toggle Button */
+.navbar-toggler {
+  border: none;
+}
