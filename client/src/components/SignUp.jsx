@@ -1,93 +1,100 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import { ADD_FOOD } from '../utils/mutations';
 
-const RecipeForm = () => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [instructions, setInstructions] = useState('');
-  const [ingredients, setIngredients] = useState('');
-  const [image, setImage] = useState('');
-  const [addFood, { error }] = useMutation(ADD_FOOD);
+import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../utils/mutations';
+
+import Auth from '../utils/auth';
+
+const Signup = () => {
+  const [formState, setFormState] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+  const [addUser, { error, data }] = useMutation(ADD_USER);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    console.log(formState);
 
     try {
-      const { data } = await addFood({
-        variables: { name, description, instructions, ingredients, image },
+      const { data } = await addUser({
+        variables: { ...formState },
       });
 
-      window.location.reload();
-    } catch (err) {
-      console.error(err, "error here");
+      Auth.login(data.addUser.token);
+    } catch (e) {
+      console.error(e);
     }
   };
 
   return (
-    <div className='container mt-4 d-flex justify-content-center align-items-center min-vh-100'>
-      <div className='card'>
-        <div className='card-header'>
-          Add your recipe:
-        </div>
-        <div className='card-body'>
-          <form className="d-flex flex-column align-items-center" onSubmit={handleFormSubmit}>
-            <div className="col-12 col-lg-9">
-              <label>Name:
+    <main className="flex-row justify-center mb-4">
+      <div className="col-12 col-lg-10">
+        <div className="card">
+          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
+          <div className="card-body">
+            {data ? (
+              <p>
+                Success! You may now head{' '}
+                <Link to="/">back to the homepage.</Link>
+              </p>
+            ) : (
+              <form onSubmit={handleFormSubmit}>
                 <input
-                  placeholder="Recipe Name..."
-                  value={name}
-                  className="form-control"
-                  onChange={(event) => setName(event.target.value)}
+                  className="form-input"
+                  placeholder="Your username"
+                  name="username"
+                  type="text"
+                  value={formState.name}
+                  onChange={handleChange}
                 />
-              </label><br/>
-              <label>Description:
                 <input
-                  placeholder="Description..."
-                  value={description}
-                  className="form-control"
-                  onChange={(event) => setDescription(event.target.value)}
+                  className="form-input"
+                  placeholder="Your email"
+                  name="email"
+                  type="email"
+                  value={formState.email}
+                  onChange={handleChange}
                 />
-              </label><br/>
-              <label>Instructions:
                 <input
-                  placeholder="Instructions..."
-                  value={instructions}
-                  className="form-control"
-                  onChange={(event) => setInstructions(event.target.value)}
+                  className="form-input"
+                  placeholder="******"
+                  name="password"
+                  type="password"
+                  value={formState.password}
+                  onChange={handleChange}
                 />
-              </label><br/>
-              <label>Ingredients:
-                <input
-                  placeholder="Ingredients..."
-                  value={ingredients}
-                  className="form-control"
-                  onChange={(event) => setIngredients(event.target.value)}
-                />
-              </label><br/>
-              <label>Image:
-                <input
-                  placeholder="Image URL..."
-                  value={image}
-                  className="form-control"
-                  onChange={(event) => setImage(event.target.value)}
-                />
-              </label><br/><br/>
-              <button className="btn btn-primary" type="submit">
-                Add Recipe
-              </button>
-            </div>      
+                <button
+                  className="btn btn-block btn-primary"
+                  style={{ cursor: 'pointer' }}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </form>
+            )}
+
             {error && (
-              <div className="col-12 my-3 bg-danger text-white p-3">
-                Something went wrong...
+              <div className="my-3 p-3 bg-danger text-white">
+                {error.message}
               </div>
             )}
-          </form>
+          </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
-export default RecipeForm;
+export default Signup;
