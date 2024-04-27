@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 
 // Important for useMutation: We import the specific query we'd like to perform from the mutations.js utility
-import { ADD_RECIPE } from '../utils/mutations';
+import { ADD_FOOD } from '../utils/mutations';
 
 const RecipeForm = () => {
   const [name, setName] = useState('');
@@ -15,7 +15,7 @@ const RecipeForm = () => {
   // Important for useMutation: We pass the mutation we'd like to execute to the useMutation hook
   // The useMutation hook returns an array. The function at index 0 can be dispatched within the component to trigger the mutation query
   // The object at index 1 contains information, such as the error boolean, which we use in this application
-  const [addRecipe, { error }] = useMutation(ADD_RECIPE);
+  const [addFood, { error }] = useMutation(ADD_FOOD);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -23,22 +23,30 @@ const RecipeForm = () => {
     try {
       // Important for useMutation: Here we want the mutation to occur in response to a form submission
       // The mutation we want to run also requires mutation parameters to be passed, which we deliver as a variables object
-      let recipeData = {
-         name: name,
-         description: description,
-         instructions: instructions,
-         ingredients: ingredients,
-         image: image
+      // let foodData = {
+      //    name: name,
+      //    description: description,
+      //    instructions: instructions,
+      //    ingredients: ingredients,
+      //    image: image
 
-      }
-      const { data } = await addRecipe({
-        variables: { ...recipeData},
+      // }
+      const { data } = await addFood({
+        variables: { 
+          name,
+          description,
+          instructions,
+          ingredients,
+          image
+
+        },
+       
         
       });
 
       window.location.reload();
     } catch (err) {
-      console.error(err);
+      console.error(err, "error here");
     }
   };
 
