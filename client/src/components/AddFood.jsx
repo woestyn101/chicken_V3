@@ -51,14 +51,14 @@ const RecipeForm = () => {
   };
 
   return (
-    <div className='container mt-4'>
+    <div className='container mt-4 d-flex justify-content-center align-items-center min-vh-100'>
       <div className='card'>
         <div className='card-header'>
         Add your recipe:
         </div>
         <div className='card-body'>
             <form
-        className="flex-row justify-center justify-space-between-md align-center"
+        className="d-flex flex-column align-items-center"
         onSubmit={handleFormSubmit}
       >
         <div className="col-12 col-lg-9">

@@ -14,19 +14,20 @@
 
 // export default App;
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { setContext } from '@apollo/client/link/context';
+import { Outlet } from 'react-router-dom';
 import './App.css';
+import NavBar from './components/NavBar.jsx';
+
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import { Outlet } from 'react-router-dom';
 
-// import Header from './components/Header';
-// import Footer from './components/Footer';
-import NavBar from './components/NavBar.jsx';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({

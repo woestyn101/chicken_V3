@@ -1,100 +1,93 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../utils/mutations';
+import { ADD_FOOD } from '../utils/mutations';
 
-import Auth from '../utils/auth';
-
-const Signup = () => {
-  const [formState, setFormState] = useState({
-    username: '',
-    email: '',
-    password: '',
-  });
-  const [addUser, { error, data }] = useMutation(ADD_USER);
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-  };
+const RecipeForm = () => {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [instructions, setInstructions] = useState('');
+  const [ingredients, setIngredients] = useState('');
+  const [image, setImage] = useState('');
+  const [addFood, { error }] = useMutation(ADD_FOOD);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
 
     try {
-      const { data } = await addUser({
-        variables: { ...formState },
+      const { data } = await addFood({
+        variables: { name, description, instructions, ingredients, image },
       });
 
-      Auth.login(data.addUser.token);
-    } catch (e) {
-      console.error(e);
+      window.location.reload();
+    } catch (err) {
+      console.error(err, "error here");
     }
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
-          <div className="card-body">
-            {data ? (
-              <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
-              </p>
-            ) : (
-              <form onSubmit={handleFormSubmit}>
+    <div className='container mt-4 d-flex justify-content-center align-items-center min-vh-100'>
+      <div className='card'>
+        <div className='card-header'>
+          Add your recipe:
+        </div>
+        <div className='card-body'>
+          <form className="d-flex flex-column align-items-center" onSubmit={handleFormSubmit}>
+            <div className="col-12 col-lg-9">
+              <label>Name:
                 <input
-                  className="form-input"
-                  placeholder="Your username"
-                  name="username"
-                  type="text"
-                  value={formState.name}
-                  onChange={handleChange}
+                  placeholder="Recipe Name..."
+                  value={name}
+                  className="form-control"
+                  onChange={(event) => setName(event.target.value)}
                 />
+              </label><br/>
+              <label>Description:
                 <input
-                  className="form-input"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
+                  placeholder="Description..."
+                  value={description}
+                  className="form-control"
+                  onChange={(event) => setDescription(event.target.value)}
                 />
+              </label><br/>
+              <label>Instructions:
                 <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={formState.password}
-                  onChange={handleChange}
+                  placeholder="Instructions..."
+                  value={instructions}
+                  className="form-control"
+                  onChange={(event) => setInstructions(event.target.value)}
                 />
-                <button
-                  className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </form>
-            )}
-
+              </label><br/>
+              <label>Ingredients:
+                <input
+                  placeholder="Ingredients..."
+                  value={ingredients}
+                  className="form-control"
+                  onChange={(event) => setIngredients(event.target.value)}
+                />
+              </label><br/>
+              <label>Image:
+                <input
+                  placeholder="Image URL..."
+                  value={image}
+                  className="form-control"
+                  onChange={(event) => setImage(event.target.value)}
+                />
+              </label><br/><br/>
+              <button className="btn btn-primary" type="submit">
+                Add Recipe
+              </button>
+            </div>      
             {error && (
-              <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
+              <div className="col-12 my-3 bg-danger text-white p-3">
+                Something went wrong...
               </div>
             )}
-          </div>
+          </form>
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 
-export default Signup;
+export default RecipeForm;
