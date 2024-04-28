@@ -14,7 +14,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "-": "^0.0.1",
     "bootstrap": "^5.3.3",
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "y": "^0.3.2"
   }
 }
