@@ -12,7 +12,13 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
 
         },
+        
     },
+    Query: {
+        foods: async () => {
+            return await Food.find({});
+          }
+    }, 
     Mutation: {
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
