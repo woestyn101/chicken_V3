@@ -49,8 +49,14 @@ const resolvers = {
         },
         addFood: async (parent, args) => {
             console.log(args)
-            const myfood = await Food.create(args);           
-            return myfood ;
+            try {
+                const myfood = await Food.create(args);           
+                return myfood ;
+
+            } catch (error) {
+                console.log(error)
+            }
+           
         },
     },
 };

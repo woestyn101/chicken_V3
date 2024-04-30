@@ -11,6 +11,8 @@ const RecipeForm = () => {
   const [instructions, setInstructions] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [image, setImage] = useState('');
+  const [foodAuthor, setfoodAuthor] = useState('');
+  
 
   // Important for useMutation: We pass the mutation we'd like to execute to the useMutation hook
   // The useMutation hook returns an array. The function at index 0 can be dispatched within the component to trigger the mutation query
@@ -37,7 +39,8 @@ const RecipeForm = () => {
           description,
           instructions,
           ingredients,
-          image
+          image,
+          foodAuthor
 
         },
        
@@ -100,6 +103,14 @@ const RecipeForm = () => {
             value={image}
             className="form-control"
             onChange={(event) => setImage(event.target.value)}
+          />
+          </label><br/>
+          <label>Author:
+          <input
+            placeholder="Author..."
+            value={foodAuthor}
+            className="form-control"
+            onChange={(event) => setfoodAuthor(event.target.value)}
           />
           </label><br/><br/>
           <button className="btn btn-primary" type="submit">
