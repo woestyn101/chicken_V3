@@ -19,6 +19,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    foods: {
+      type: Schema.Types.ObjectId,
+      ref:  'Food',
+    },
      },
   
   {
