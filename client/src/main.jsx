@@ -11,7 +11,7 @@ import App from './App.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import SignUp from './components/SignUp.jsx';
 import Login from './components/Login.jsx';
-import Chicken from './components/Chiken.jsx';
+import Chicken from './components/Chicken.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
 
 const router = createBrowserRouter([
