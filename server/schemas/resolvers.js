@@ -5,20 +5,28 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        me: async (parent, args, context) => {
+        users: async () => {
+            return User.find().populate('foods');
+          },
+          user: async (parent, { username }) => {
+            return User.findOne({ username }).populate('foods');
+          },
+          foods: async (parent, { username }) => {
+            const params = username ? { username } : {};
+            return Food.find(params).sort({ createdAt: -1 });
+          },
+          food: async (parent, { foodId }) => {
+            return Food.findOne({ _id: foodId });
+          },
+          me: async (parent, args, context) => {
             if (context.user) {
-                return await User.findOne({ _id: context.user._id });
+              return User.findOne({ _id: context.user._id }).populate('foods');
             }
-            throw new AuthenticationError('You need to be logged in!');
-
-        },
+            throw AuthenticationError;
+          },
         
     },
-    Query: {
-        foods: async () => {
-            return await Food.find({});
-          }
-    }, 
+   
     Mutation: {
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
