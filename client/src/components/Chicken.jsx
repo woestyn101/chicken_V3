@@ -14,7 +14,7 @@ const Chicken = () => {
     <h1>CHICKEN</h1>
     <ChickenList 
      foods={foods}/>
-   
+      <ChickenList image={foods.image}/>
 
     
     
