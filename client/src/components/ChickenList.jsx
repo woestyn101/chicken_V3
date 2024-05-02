@@ -28,7 +28,7 @@ const FoodList = ({ foods }) => {
   }
 
   return (
-    <div className="container-fluid">
+  <div className="container-fluid">
       <div className="row">
         {foods.map((food, i) => (
           <FoodCard key={i} food={food} />
