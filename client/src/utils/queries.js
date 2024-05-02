@@ -9,6 +9,8 @@ export const QUERY_FOOD = gql`
       instructions
       ingredients
       image
+      foodAuthor
+     
 
     }
   }
@@ -22,6 +24,8 @@ export const QUERY_FOODS = gql`
       instructions
       ingredients
       image
+      foodAuthor
+      
     }
   }
 `;
