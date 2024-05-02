@@ -17,6 +17,7 @@ const typeDefs =`
      instructions: String    
      image: String
      foodAuthor: String
+     createdAt: String
     
 }
 
