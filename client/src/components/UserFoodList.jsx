@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
+//code
+
 const FoodList = ({ foods }) => {
   if (!foods) {
     return <h3>No Recipes Yet</h3>;
