@@ -15,7 +15,7 @@ const FoodCard = ({ food }) => {
           <h6><strong><u>Ingredients</u></strong></h6>
           <p className="card-text">{food.ingredients}</p>
           <h6><strong><u>Image</u></strong></h6>
-          <p className="card-text">{food.image}</p>
+          <img src={food.image} ></img>
         </div>
       </div>
     </div>
