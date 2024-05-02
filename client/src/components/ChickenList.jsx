@@ -1,5 +1,26 @@
-import { Link } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import React from 'react';
+
+const FoodCard = ({ food }) => {
+  return (
+    <div className="col mb-4">
+      <div className="card h-100 w-100">
+        <div className="card-header bg-dark text-light">
+          {food.name}
+        </div>
+        <div className="card-body">
+          <h6><strong><u>Description</u></strong></h6>
+          <p className="card-text">{food.description}</p>
+          <h6><strong><u>Instructions</u></strong></h6>
+          <p className="card-text">{food.instructions}</p>
+          <h6><strong><u>Ingredients</u></strong></h6>
+          <p className="card-text">{food.ingredients}</p>
+          <h6><strong><u>Image</u></strong></h6>
+          <p className="card-text">{food.image}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const FoodList = ({ foods }) => {
   if (!foods) {
@@ -7,36 +28,11 @@ const FoodList = ({ foods }) => {
   }
 
   return (
-    <div>
-     
-      <div className="flex-row justify-space-between my-4">
-        {foods &&
-          foods.map((myfood, i) => (
-            <div key={i} className="col-12 col-xl-6">
-              <div className="card mb-3">
-                <h4 className="card-header bg-dark text-light p-2 m-0" >
-                  {myfood.name} <br />         
-
-                 
-                </h4>                
-              </div>
-              <div className="card-body">
-                <h6>Description</h6>
-                  {myfood.description} <br />
-                  <h6>Instructions</h6>
-                  {myfood.instructions} <br />
-                  <h6>Ingredients</h6>
-                  {myfood.ingredients} <br />
-                  <h6>Image</h6>
-                  {myfood.image} <br />
-                  <h6>Author</h6>
-                  {myfood.foodAuthor} <br />
-                 
-                  
-                  
-              </div>
-            </div>
-          ))}
+  <div className="container-fluid">
+      <div className="row">
+        {foods.map((food, i) => (
+          <FoodCard key={i} food={food} />
+        ))}
       </div>
     </div>
   );

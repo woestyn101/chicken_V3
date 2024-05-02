@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client';
 import ChickenList from './ChickenList';
 import { QUERY_FOODS } from '../utils/queries';
 
+
 const Chicken = () => {
   const { loading, data } = useQuery(QUERY_FOODS);
   const foods = data?.foods || [];
