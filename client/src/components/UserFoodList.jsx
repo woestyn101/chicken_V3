@@ -46,7 +46,6 @@ const Profile = () => {
             foods={user.foods}
            
           />
-          <img src={user.image}></img>
               </div>
         {!userParam && (
           <div
