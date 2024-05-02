@@ -31,6 +31,8 @@ const FoodList = ({ foods }) => {
                   {myfood.image} <br />
                   <h6>Author</h6>
                   {myfood.foodAuthor} <br />
+                 
+                  
                   
               </div>
             </div>
