@@ -1,15 +1,23 @@
 import { Link } from 'react-router-dom';
 
 import { useQuery } from '@apollo/client';
-import { QUERY_USER } from '../utils/queries';
+import { QUERY_ME } from '../utils/queries';
 
-function OrderHistory() {
-  const { data } = useQuery(QUERY_USER);
+function UsersFood() {
+  const { loading, data  } = useQuery(QUERY_ME);
+  console.log(data);
   let user;
+  const userData = data?.me   || {};
 
-  if (data) {
-    user = data.user;
+  // if (data) {
+  //   user = data.user;
+  // }
+
+  if (loading) {
+    return <div>Loading...</div>;
   }
+
+  console.log(userData);
 
   return (
     <>
@@ -29,4 +37,4 @@ function OrderHistory() {
   );
 }
 
-export default OrderHistory;
+export default UsersFood;

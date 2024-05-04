@@ -19,10 +19,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    foods: {
+    foods: [{
       type: Schema.Types.ObjectId,
       ref:  'Food',
-    },
+    }],
      },
   
   {

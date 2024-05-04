@@ -8,9 +8,7 @@ const resolvers = {
         users: async () => {
             return User.find().populate('foods');
           },
-          user: async (parent, { username }) => {
-            return User.findOne({ username }).populate('foods');
-          },
+          
           foods: async (parent, { username }) => {
             const params = username ? { username } : {};
             return Food.find(params).sort({ createdAt: -1 });
@@ -19,8 +17,10 @@ const resolvers = {
             return Food.findOne({ _id: foodId });
           },
           me: async (parent, args, context) => {
+            console.log(context.user);
             if (context.user) {
-              return User.findOne({ _id: context.user._id }).populate('foods');
+              let userData = await User.findOne({ _id: context.user._id }).select('-__v').populate('foods');
+              console.log(userData);
             }
             throw AuthenticationError;
           },
@@ -58,7 +58,16 @@ const resolvers = {
             }
            
         },
+        updateFood: async (parent, { _id, name, description, ingredients, instructions, foodAuthor }) => {
+             
+          return await Food.findByIdAndUpdate(_id, args, { new: true });
+        },
+        removeFood: async (parent, args) => {
+          return await Food.findByIdAndDelete(_id, args, { new: true });
+        },
+        
     },
+    
 };
 
 module.exports = resolvers;
