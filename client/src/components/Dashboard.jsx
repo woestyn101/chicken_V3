@@ -17,10 +17,7 @@ const Chicken = () => {
     <RecipeForm></RecipeForm>
     <h2>Your recipes:</h2>
     <UserFoodList></UserFoodList>
-    <ChickenList 
-     foods={foods}/>
-      <ChickenList image={foods.image}/>
-
+   
     
     
     </>
