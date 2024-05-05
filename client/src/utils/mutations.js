@@ -41,8 +41,8 @@ export const ADD_FOOD = gql`
 
 
 export const REMOVE_FOOD = gql`
-  mutation removefood($name: String!, $description: String, $instructions: String, $ingredients: String, $image: String, $foodAuthor: String ) {
-    removeSkill(name: $name, description: $description, instructions: $instructions, ingredients: $ingredients, image: $image, foodAuthor: $foodAuthor) {
+  mutation removefood($id: ID!, ) {
+    removeFood(_id:$id) {
       _id
       name
       description
