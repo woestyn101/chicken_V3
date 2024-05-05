@@ -3,6 +3,28 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 
+const FoodCard = ({ food }) => {
+  return (
+    <div className="col mb-4">
+      <div className="card h-100 w-100">
+        <div className="card-header bg-dark text-light">
+          {food.name}
+        </div>
+        <div className="card-body">
+          <h6><strong><u>Description</u></strong></h6>
+          <p className="card-text">{food.description}</p>
+          <h6><strong><u>Instructions</u></strong></h6>
+          <p className="card-text">{food.instructions}</p>
+          <h6><strong><u>Ingredients</u></strong></h6>
+          <p className="card-text">{food.ingredients}</p>
+          <h6><strong><u>Image</u></strong></h6>
+          <img src={food.image} ></img>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 function UsersFood() {
   const { loading, data  } = useQuery(QUERY_ME);
   console.log(data);
@@ -24,11 +46,18 @@ function UsersFood() {
       <div className="container my-1">
         <Link to="/">← Back to Main Page</Link>
         
-        {user ? (
+        {userData ? (
           <>
             <h2>
-           Recipes for {user.username} {user.email}
+           Recipes for {userData.username} {userData.email}
             </h2>
+            <div className="container-fluid">
+      <div className="row">
+        {userData.foods.map((food, i) => (
+          <FoodCard key={i} food={food} />
+        ))}
+      </div>
+    </div>
            
           </>
         ) : null}

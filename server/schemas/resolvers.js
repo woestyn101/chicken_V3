@@ -21,6 +21,7 @@ const resolvers = {
             if (context.user) {
               let userData = await User.findOne({ _id: context.user._id }).select('-__v').populate('foods');
               console.log(userData);
+              return userData
             }
             throw AuthenticationError;
           },
