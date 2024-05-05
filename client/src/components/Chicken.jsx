@@ -11,7 +11,7 @@ const Chicken = () => {
   const foods = data?.foods || [];
   return (
     <>
-    <h1>CHICKEN</h1>
+    <br></br>
     <ChickenList 
      foods={foods}/>
       <ChickenList image={foods.image}/>

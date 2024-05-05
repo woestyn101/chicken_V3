@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const FoodCard = ({ food }) => {
   return (
@@ -15,20 +15,21 @@ const FoodCard = ({ food }) => {
           <h6><strong><u>Ingredients</u></strong></h6>
           <p className="card-text">{food.ingredients}</p>
           <h6><strong><u>Image</u></strong></h6>
-          <img src={food.image} ></img>
+          <img src={food.image} style={{ width: '300px', height: '300px' }} alt="Food" />
         </div>
       </div>
     </div>
   );
 };
+ 
 
 const FoodList = ({ foods }) => {
   if (!foods) {
-    return <h3>No Recipes Yet</h3>;
+    return <h3></h3>;
   }
 
   return (
-  <div className="container-fluid">
+    <div className="container-fluid">
       <div className="row">
         {foods.map((food, i) => (
           <FoodCard key={i} food={food} />
