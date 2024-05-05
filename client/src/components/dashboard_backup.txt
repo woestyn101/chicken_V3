@@ -1,0 +1,17 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import "../components/styles/navBar.css";
+import RecipeForm from "./AddFood";
+import { useQuery } from '@apollo/client';
+import FoodList2 from "./ChickenList2";
+import { QUERY_FOODS } from '../utils/queries';
+
+const Dashboard = () => {
+  return (
+    <>
+      <RecipeForm></RecipeForm>
+    </>
+  );
+};
+
+export default Dashboard;

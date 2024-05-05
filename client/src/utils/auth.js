@@ -11,10 +11,10 @@ class AuthService {
   isTokenExpired(token) {
     console.log("test2");
     const decoded = decode(token);
-    // if (decoded.exp < Date.now()) {
-    //   localStorage.removeItem("id_token");
-    //   return true;
-    // }
+    if (decoded.exp < Date.now() / 1000) {
+      localStorage.removeItem("id_token");
+      return true;
+    }
     return false;
   }
   getToken() {
@@ -23,6 +23,7 @@ class AuthService {
   }
   login(idToken) {
     localStorage.setItem("id_token", idToken);
+    console.log(localStorage.getItem('id_token'));
     window.location.assign("/dashboard");
   }
   logout() {

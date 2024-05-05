@@ -1,63 +1,69 @@
-import { Navigate, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import { useQuery } from '@apollo/client';
+import { QUERY_ME } from '../utils/queries';
 
-
-import FoodList from '../components/FoodList';
-
-import { QUERY_USER, QUERY_ME } from '../utils/queries';
-
-import Auth from '../utils/auth';
-
-const Profile = () => {
-  const { username: userParam } = useParams();
-
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-    variables: { username: userParam },
-  });
-
-  const user = data?.me || data?.user || {};
-  // navigate to personal profile page if username is yours
-  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-    return <Navigate to="/me" />;
-  }
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!user?.username) {
-    return (
-      <h4>
-        You need to be logged in to see this. Use the navigation links above to
-        sign up or log in!
-      </h4>
-    );
-  }
-
+const FoodCard = ({ food }) => {
   return (
-    <div>
-      <div className="flex-row justify-center mb-3">
-        <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
-          Viewing {userParam ? `${user.username}'s` : 'your'} profile.
-        </h2>
-
-        <div className="col-12 col-md-10 mb-5">
-          <FoodList
-            foods={user.foods}
-           
-          />
-              </div>
-        {!userParam && (
-          <div
-            className="col-12 col-md-10 mb-3 p-3"
-            style={{ border: '1px dotted #1a1a1a' }}
-          >
-           
-            </div>
-        )}
+    <div className="col mb-4">
+      <div className="card h-100 w-100">
+        <div className="card-header bg-dark text-light">
+          {food.name}
+        </div>
+        <div className="card-body">
+          <h6><strong><u>Description</u></strong></h6>
+          <p className="card-text">{food.description}</p>
+          <h6><strong><u>Instructions</u></strong></h6>
+          <p className="card-text">{food.instructions}</p>
+          <h6><strong><u>Ingredients</u></strong></h6>
+          <p className="card-text">{food.ingredients}</p>
+          <h6><strong><u>Image</u></strong></h6>
+          <img src={food.image} ></img>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Profile;
+function UsersFood() {
+  const { loading, data  } = useQuery(QUERY_ME);
+  console.log(data);
+  let user;
+  const userData = data?.me   || {};
+
+  // if (data) {
+  //   user = data.user;
+  // }
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  console.log(userData);
+
+  return (
+    <>
+      <div className="container my-1">
+        <Link to="/">← Back to Main Page</Link>
+        
+        {userData ? (
+          <>
+            <h2>
+           Recipes for {userData.username} {userData.email}
+            </h2>
+            <div className="container-fluid">
+      <div className="row">
+        {userData.foods.map((food, i) => (
+          <FoodCard key={i} food={food} />
+        ))}
+      </div>
+    </div>
+           
+          </>
+        ) : null}
+      </div>
+    </>
+  );
+}
+
+export default UsersFood;

@@ -40,4 +40,18 @@ export const ADD_FOOD = gql`
 `;
 
 
+export const REMOVE_FOOD = gql`
+  mutation removefood($name: String!, $description: String, $instructions: String, $ingredients: String, $image: String, $foodAuthor: String ) {
+    removeSkill(name: $name, description: $description, instructions: $instructions, ingredients: $ingredients, image: $image, foodAuthor: $foodAuthor) {
+      _id
+      name
+      description
+      instructions
+      ingredients
+      image
+      foodAuthor
+    }
+  }
+`;
+
 
