@@ -5,15 +5,19 @@ const typeDefs =`
       _id: ID!
       username: String!
       email: String!
+      foods:[Food]!
   
   }
 
   type Food {
+    _id: ID
      name: String!
      description: String
      ingredients: String
      instructions: String    
      image: String
+     foodAuthor: String
+     createdAt: String
     
 }
 
@@ -24,16 +28,20 @@ const typeDefs =`
   }
 
   type Query {
-      me: User  
-      foods: [Food]
-
+    users: [User]
+    user(username: String!): User
+    foods(username: String): [Food]
+    food(foodId: ID!): Food
+    me: User
   }
   
 
   type Mutation {
       login( email: String!, password: String!): Auth
       addUser(username: String!, email: String!, password: String!): Auth
-      addFood(name: String, description: String, instructions: String, ingredients: String, image: String): Food
+      addFood(name: String, description: String, instructions: String, ingredients: String, image: String, foodAuthor: String): Food
+      updateFood(_id: ID!, name: String, description: String, instructions: String, ingredients: String, image: String, foodAuthor: String): Food
+      removeFood(_id: ID!): Food
    
   }
 `;

@@ -5,20 +5,29 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        me: async (parent, args, context) => {
+        users: async () => {
+            return User.find().populate('foods');
+          },
+          
+          foods: async (parent, { username }) => {
+            const params = username ? { username } : {};
+            return Food.find(params).sort({ createdAt: -1 });
+          },
+          food: async (parent, { foodId }) => {
+            return Food.findOne({ _id: foodId });
+          },
+          me: async (parent, args, context) => {
+            console.log(context.user);
             if (context.user) {
-                return await User.findOne({ _id: context.user._id });
+              let userData = await User.findOne({ _id: context.user._id }).select('-__v').populate('foods');
+              console.log(userData);
+              return userData
             }
-            throw new AuthenticationError('You need to be logged in!');
-
-        },
+            throw AuthenticationError;
+          },
         
     },
-    Query: {
-        foods: async () => {
-            return await Food.find({});
-          }
-    }, 
+   
     Mutation: {
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
@@ -41,10 +50,32 @@ const resolvers = {
         },
         addFood: async (parent, args) => {
             console.log(args)
-            const myfood = await Food.create(args);           
-            return myfood ;
+            try {
+                const myfood = await Food.create(args);           
+               console.log(args._id);
+
+                let updatedUser = await User.findByIdAndUpdate(args._id,  {
+                  $push: { foods: myfood._id},
+                });
+                console.log(updatedUser);
+        
+               // return myfoods;
+
+            } catch (error) {
+                console.log(error)
+            }
+           
         },
+        updateFood: async (parent, { _id, name, description, ingredients, instructions, foodAuthor }) => {
+             
+          return await Food.findByIdAndUpdate(_id, args, { new: true });
+        },
+        removeFood: async (parent, args) => {
+          return await Food.findByIdAndDelete(_id, args, { new: true });
+        },
+        
     },
+    
 };
 
 module.exports = resolvers;
