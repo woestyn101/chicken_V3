@@ -25,7 +25,7 @@ const FoodCard = ({ food }) => {
 
 const FoodList = ({ foods }) => {
   if (!foods) {
-    return <h3>No Recipes Yet</h3>;
+    return <h3></h3>;
   }
 
   return (
