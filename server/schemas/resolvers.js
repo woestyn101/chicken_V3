@@ -52,7 +52,14 @@ const resolvers = {
             console.log(args)
             try {
                 const myfood = await Food.create(args);           
-                return myfood ;
+               console.log(args._id);
+
+                let updatedUser = await User.findByIdAndUpdate(args._id,  {
+                  $push: { foods: myfood._id},
+                });
+                console.log(updatedUser);
+        
+               // return myfoods;
 
             } catch (error) {
                 console.log(error)

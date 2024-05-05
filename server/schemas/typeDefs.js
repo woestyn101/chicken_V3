@@ -41,7 +41,7 @@ const typeDefs =`
       addUser(username: String!, email: String!, password: String!): Auth
       addFood(name: String, description: String, instructions: String, ingredients: String, image: String, foodAuthor: String): Food
       updateFood(_id: ID!, name: String, description: String, instructions: String, ingredients: String, image: String, foodAuthor: String): Food
-      removeFood(foodId: ID!): Food
+      removeFood(_id: ID!): Food
    
   }
 `;
