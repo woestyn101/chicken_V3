@@ -5,7 +5,6 @@ import { useQuery } from '@apollo/client';
 import ChickenList from './ChickenList';
 import { QUERY_FOODS } from '../utils/queries';
 import RecipeForm from "./AddFood";
-import FoodList2 from "./ChickenList2";
 import UserFoodList from './UserFoodList'
 
 const Chicken = () => {
