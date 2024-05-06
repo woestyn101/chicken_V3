@@ -6,7 +6,7 @@ A brief description of what this project does and who it's for
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](./client/photos/app_screenshot.jpg)
 
 This is the Chicken App, a full-stack web application built with React, GraphQL, Node.js, Express.js, MongoDB, Mongoose, and JWT authentication. It allows users to browse, add, update, and delete chicken recipes.
 
