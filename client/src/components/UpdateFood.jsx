@@ -114,7 +114,7 @@ const UpdateRecipeForm = () => {
           />
           </label><br/><br/>
           <button className="btn btn-primary" type="submit">
-            Add Recipe
+            Update Recipe
           </button>
         </div>      
          
