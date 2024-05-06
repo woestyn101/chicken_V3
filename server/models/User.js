@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-
 const userSchema = new Schema(
   {
     username: {
@@ -23,8 +22,7 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref:  'Food',
     }],
-     },
-  
+  },
   {
     toJSON: {
       virtuals: true,
@@ -32,24 +30,31 @@ const userSchema = new Schema(
   }
 );
 
-
+// Hash password before saving
 userSchema.pre('save', async function (next) {
-  if (this.isNew || this.isModified('password')) {
-    const saltRounds = 10;
-    this.password = await bcrypt.hash(this.password, saltRounds);
+  try {
+    if (this.isNew || this.isModified('password')) {
+      const saltRounds = 10;
+      this.password = await bcrypt.hash(this.password, saltRounds);
+    }
+    next();
+  } catch (error) {
+    next(error);
   }
-
-  next();
 });
 
-
+// Method to compare passwords
 userSchema.methods.isCorrectPassword = async function (password) {
-  return bcrypt.compare(password, this.password);
+  try {
+    return await bcrypt.compare(password, this.password);
+  } catch (error) {
+    return false;
+  }
 };
 
-
-userSchema.virtual('bookCount').get(function () {
-  return this.savedBooks.length;
+// Virtual field to count foods
+userSchema.virtual('foodCount').get(function () {
+  return this.foods.length;
 });
 
 const User = model('User', userSchema);
