@@ -54,4 +54,20 @@ export const REMOVE_FOOD = gql`
   }
 `;
 
+export const UPDATE_FOOD = gql`
+  mutation updateFood($foodid: ID!,$name: String!, $description: String, $instructions: String, $ingredients: String, $image: String, $foodAuthor: String ) {
+    updateFood(foodid: $foodid, name: $name, description: $description, instructions: $instructions, ingredients: $ingredients, image: $image, foodAuthor: $foodAuthor ) {
+      _id
+      name
+      description
+      instructions
+      ingredients
+      image
+      foodAuthor
+     
+    }
+  }
+`;
+
+
 

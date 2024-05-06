@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 
 // Important for useMutation: We import the specific query we'd like to perform from the mutations.js utility
-import { ADD_FOOD } from '../utils/mutations';
+import { UPDATE_FOOD } from '../utils/mutations';
 
-const RecipeForm = () => {
+const UpdateRecipeForm = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [instructions, setInstructions] = useState('');
@@ -17,7 +17,7 @@ const RecipeForm = () => {
   // Important for useMutation: We pass the mutation we'd like to execute to the useMutation hook
   // The useMutation hook returns an array. The function at index 0 can be dispatched within the component to trigger the mutation query
   // The object at index 1 contains information, such as the error boolean, which we use in this application
-  const [addFood, { error }] = useMutation(ADD_FOOD);
+  const [updateFood, { error }] = useMutation(UPDATE_FOOD);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -33,7 +33,7 @@ const RecipeForm = () => {
       //    image: image
 
       // }
-      const { data } = await addFood({
+      const { data } = await updateFood({
         variables: { 
           name,
           description,
@@ -57,7 +57,7 @@ const RecipeForm = () => {
     <div className='container mt-4 d-flex justify-content-center align-items-center min-vh-100'>
       <div className='card'>
         <div className='card-header bg-dark text-light'>
-        Add your recipe:
+        Update your recipe:
         </div>
         <div className='card-body'>
             <form
@@ -132,4 +132,4 @@ const RecipeForm = () => {
   );
 };
 
-export default RecipeForm;
+export default UpdateRecipeForm;

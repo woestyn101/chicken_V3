@@ -53,8 +53,19 @@ const resolvers = {
         throw new Error('Failed to add food');
       }
     },
-    updateFood: async (parent, { _id, ...args }) => {
-      return await Food.findByIdAndUpdate(_id, args, { new: true });
+    updateFood: async (parent, args, context) => {
+      try {
+        const myfood = await Food.create(args);
+        const updatedUser = await User.findByIdAndUpdate(
+          context.user._id,
+          { $push: { foods: myfood._id } },
+          { new: true }
+        ).populate('foods');
+        return myfood;
+      } catch (error) {
+        console.log(error);
+        throw new Error('Failed to add food');
+      }
     },
     removeFood: async (parent, { id }, context) => {
       try {
