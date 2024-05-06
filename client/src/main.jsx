@@ -13,6 +13,7 @@ import SignUp from './components/SignUp.jsx';
 import Login from './components/Login.jsx';
 import Chicken from './components/Chicken.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
+import Updating from './components/UpdatePage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "chicken",
         element: <Chicken />,
+      },
+      {
+        path: "update/:foodId",
+        element: <Updating />,
       },
     ],
   },

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-
+import "../components/styles/navBar.css";
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 
@@ -19,7 +19,11 @@ const FoodCard = ({ food }) => {
           <p className="card-text">{food.ingredients}</p>
           <h6><strong><u>Image</u></strong></h6>
           <img src={food.image} ></img>
-        </div>
+          <h6><span className="deleteBtn">DELETE</span></h6>
+          <Link className="updateBtn" data-foodid={food._id} to={`/update/${food._id}`} >
+                  UPDATE
+                </Link>
+                  </div>
       </div>
     </div>
   );
@@ -54,9 +58,12 @@ function UsersFood() {
             <div className="container-fluid">
       <div className="row">
         {userData.foods.map((food, i) => (
+          
           <FoodCard key={i} food={food} />
+          
         ))}
       </div>
+      
     </div>
            
           </>

@@ -40,7 +40,7 @@ const typeDefs =`
       login( email: String!, password: String!): Auth
       addUser(username: String!, email: String!, password: String!): Auth
       addFood(name: String, description: String, instructions: String, ingredients: String, image: String, foodAuthor: String): Food
-      updateFood(_id: ID!, name: String, description: String, instructions: String, ingredients: String, image: String, foodAuthor: String): Food
+      updateFood(foodid: ID!, name: String, description: String, instructions: String, ingredients: String, image: String, foodAuthor: String): Food
       removeFood(_id: ID!): Food
    
   }
